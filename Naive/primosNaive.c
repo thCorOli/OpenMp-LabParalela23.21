@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
     		
 	
 	//Funcao para a saida do programa
-	t_final = omp_get_wtime();
+	t_final = omp_get_wtime(); // Pego o tempo em que foi finalizado o programa
     printf("Quant. de primos entre 1 e n: %d \n", total);
     printf("Tempo de execucao: %1.7f \n", t_final - t_inicio);	 
 	
