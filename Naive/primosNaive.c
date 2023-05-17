@@ -12,11 +12,11 @@ int primo (long int n) {
 }
 
 int main(int argc, char *argv[]) {
-	double t_final;
-	int total = 1;
-	long int n;
-    double t_inicio = omp_get_wtime(); // Pega o tempo em que as threads iniciaram a execução
-    omp_set_num_threads(4); // Número de threads a ser usada
+	double tFinal;
+	int total = 1, numThread = 4;
+	long int nEntrada;
+    double tInicio = omp_get_wtime(); // Pega o tempo em que as threads iniciaram a execução
+    omp_set_num_threads(numThread); // Número de threads a ser usada
 
 	//Funcao para a entrada de dados
 
@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
         	printf("Valor inválido! Entre com um valor do maior inteiro\n");
        	 	return 0;
     	} else {
-        	n = strtol(argv[1], (char **) NULL, 10);
+        	nEntrada = strtol(argv[1], (char **) NULL, 10);
        	}
 
 	// Paralelismo
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
 	//Funcao para a saida do programa
 	t_final = omp_get_wtime(); // Pego o tempo em que foi finalizado o programa
     printf("Quant. de primos entre 1 e n: %d \n", total);
-    printf("Tempo de execucao: %1.7f \n", t_final - t_inicio);	 
+    printf("Tempo de execucao: %1.7f \n", tFinal - tInicio);	 
 	
 	return(0);
 }
