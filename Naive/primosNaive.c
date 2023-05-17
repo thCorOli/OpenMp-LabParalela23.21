@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         	n = strtol(argv[1], (char **) NULL, 10);
        	}
 
-	#pragma omp parallel for  shared(n,h)
+	#pragma omp parallel for reduction(+:total)
     {
 
     }
