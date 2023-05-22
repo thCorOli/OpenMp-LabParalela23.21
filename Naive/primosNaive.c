@@ -5,20 +5,20 @@
 #define TRUE 1
 #define FALSE 0
 
-void setData(int* setNumThread, long int* setEntrada) {
+void setData(int* setNumThread, long int* setEntry) {
 	printf("Digite o número de threads: ");
 	scanf("%d",setNumThread);
 	printf("Digite o n para saber a soma de seus primos: ");
-	scanf("%ld",setEntrada);
+	scanf("%ld",setEntry);
 	return ;
 }
 
-int validateData (int setNumThread,  long int setEntrada) {
-	if(setNumThread < 1){
+int validateData (int numThread,  long int entryNumber) {
+	if(numThread < 1){
 		printf("Digite um número valido de threads\n");
 		return FALSE;
 	}
-	if (setEntrada < 2) {
+	if (entryNumber < 2) {
         	printf("Valor inválido! Entre com um valor acima de 2.\n");
        	 	return FALSE;
 	}
@@ -33,36 +33,36 @@ int primo (long int n) {
 	return 1;
 }
 
-void output(int total, double tInicio, double tFinal, long int n) {
+void output(int total, double tStart, double tFinal, long int n) {
 	printf("Quant. de primos entre 1 e %ld: %d \n",n, total);
-    printf("Tempo de execucao: %1.7f \n", tFinal - tInicio);
+    printf("Tempo de execucao: %1.7f \n", tFinal - tStart);
 }
 
 int main() {
 	double tFinal;
 	int total = 1, numThread = 0;
-	long int nEntrada;
-    double tInicio = omp_get_wtime(); // Pega o tempo em que as threads iniciaram a execução
+	long int entryNumber;
+    double tStart = omp_get_wtime(); // Pega o tempo em que as threads iniciaram a execução
 
 	//Funcao para a entrada de dados
-	setData(&numThread,&nEntrada);
+	setData(&numThread,&entryNumber);
 
 	//Funcao para validar
-	if(validateData(numThread,nEntrada) == FALSE) return 0;
+	if(validateData(numThread,entryNumber) == FALSE) return 0;
     
 	// Número de threads a ser usada
 	omp_set_num_threads(numThread); 
 
 	// Paralelismo
 	#pragma omp parallel for reduction(+:total)
-		for (int i = 3; i <= nEntrada; i += 2) {
+		for (int i = 3; i <= entryNumber; i += 2) {
          	if(primo(i) == 1) total++;
 		}	
     		
 	tFinal = omp_get_wtime(); // Pega o tempo em que foi finalizado o programa
 
 	//Funcao para a saida do programa
-    output(total,tInicio,tFinal,nEntrada);	 
+    output(total,tStart,tFinal,entryNumber);	 
 	
 	return 0;
 }
