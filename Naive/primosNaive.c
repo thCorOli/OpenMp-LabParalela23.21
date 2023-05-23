@@ -6,10 +6,12 @@
 #define FALSE 0
 
 void setData(int* setNumThread, long int* setEntry) {
-	printf("Digite o número de threads: ");
-	scanf("%d",setNumThread);
-	printf("Digite o n para saber a soma de seus primos: ");
-	scanf("%ld",setEntry);
+	//printf("Digite o número de threads: ");
+	//scanf("%d",setNumThread);
+	//printf("Digite o n para saber a soma de seus primos: ");
+	//scanf("%ld",setEntry);
+	*setNumThread = 4;
+	*setEntry = 10000;
 	return ;
 }
 
