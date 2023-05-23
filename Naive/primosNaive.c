@@ -11,7 +11,7 @@ void setData(int* setNumThread, long int* setEntry) {
 	//printf("Digite o n para saber a soma de seus primos: ");
 	//scanf("%ld",setEntry);
 	*setNumThread = 4;
-	*setEntry = 10000;
+	*setEntry = 100000000;
 	return ;
 }
 
