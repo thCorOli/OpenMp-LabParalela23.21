@@ -6,12 +6,8 @@
 #define FALSE 0
 
 void setData(int* setNumThread, long int* setEntry) {
-	//printf("Digite o número de threads: ");
-	//scanf("%d",setNumThread);
-	//printf("Digite o n para saber a soma de seus primos: ");
-	//scanf("%ld",setEntry);
 	*setNumThread = 4;
-	*setEntry = 100000000;
+	*setEntry = 10000000;
 	return ;
 }
 
@@ -21,8 +17,8 @@ int validateData (int numThread,  long int entryNumber) {
 		return FALSE;
 	}
 	if (entryNumber < 2) {
-        	printf("Valor inválido! Entre com um valor acima de 2.\n");
-       	 	return FALSE;
+		printf("Valor inválido! Entre com um valor acima de 2.\n");
+		return FALSE;
 	}
 	return TRUE;
 }
@@ -30,7 +26,7 @@ int validateData (int numThread,  long int entryNumber) {
 int primo (long int n) {
 	int i;
 	for (i = 3; i < (int)(sqrt(n) + 1); i+=2) {
-			if(n % i == 0) return 0;
+		if(n % i == 0) return 0;
 	}
 	return 1;
 }
