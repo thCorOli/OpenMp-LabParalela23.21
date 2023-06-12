@@ -4,10 +4,11 @@
 #include <math.h>
 #define TRUE 1
 #define FALSE 0
+#define TAMANHO 50000
 
 void setData(int* setNumThread, long int* setEntry) {
-	*setNumThread = 4;
-	*setEntry = 10000000;
+	*setNumThread = 8;
+	*setEntry = 100000;
 	return ;
 }
 
@@ -31,14 +32,18 @@ int primo (long int n) {
 	return 1;
 }
 
-void output(int total, double tStart, double tFinal, long int n) {
+void output(int total, double tStart, double tFinal, long int n, int numThread) {
 	printf("Quant. de primos entre 1 e %ld: %d \n",n, total);
     printf("Tempo de execucao: %1.7f \n", tFinal - tStart);
+	FILE *fpt; 
+	fpt = fopen("Bag_Of_Task.csv", "a"); 
+    fprintf(fpt,"%ld, %d, %1.7f, %d\n", n,total,tFinal - tStart, numThread);
+    fclose(fpt);
 }
 
 int main() {
 	double tFinal;
-	int total = 1, numThread = 0;
+	int total = 1, numThread = 0, stop = 0;
 	long int entryNumber;
     double tStart = omp_get_wtime(); // Pega o tempo em que as threads iniciaram a execução
 
@@ -51,9 +56,12 @@ int main() {
 	// Número de threads a ser usada
 	omp_set_num_threads(numThread); 
 
+	#pragma omp parallel for schedule(dynamic,TAMANHO) reduction(+:total)
+		for(int i = 3; i <= entryNumber; i+=2){
+			if(primo(i) == 1) total++;
+		}
 	
-
     tFinal = omp_get_wtime();
-	output(total,tStart,tFinal,entryNumber); 
+	output(total,tStart,tFinal,entryNumber,numThread); 
 	return(0);
 }

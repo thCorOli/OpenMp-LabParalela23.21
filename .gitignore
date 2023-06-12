@@ -10,6 +10,7 @@
 *.ko
 *.obj
 *.elf
+*.csv
 
 # Linker output
 *.ilk
@@ -73,5 +74,5 @@ dkms.conf
 # Ignore all local history of files
 .history
 .ionide
-
+.vscode
 # End of https://www.toptal.com/developers/gitignore/api/c,visualstudiocode
