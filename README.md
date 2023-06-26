@@ -24,7 +24,7 @@ Nesse modelo, as tarefas são agrupadas em um "saco" (bag) ou lista, e os proces
 
 1. Divisão dos intervalos: O primeiro passo seria dividir o conjunto de números que você deseja verificar em vários intervalos. Por exemplo, se você deseja encontrar números primos entre 1 e 1000, pode dividir essa faixa em intervalos menores, como [1-250], [251-500], [501-750] e [751-1000].
 
-2. Criar tarefas: Em seguida, você cria tarefas para cada intervalo. Cada tarefa seria responsável por verificar se os números em seu intervalo são primos. Isso pode ser feito usando um algoritmo de verificação de primalidade, como o teste de primalidade de Miller-Rabin ou o Crivo de Eratóstenes.
+2. Criar tarefas: Em seguida, você cria tarefas para cada intervalo. Cada tarefa seria responsável por verificar se os números em seu intervalo são primos. 
 
 3. Distribuir tarefas: As tarefas são distribuídas entre os processadores ou threads disponíveis para serem executadas em paralelo. Cada processador ou thread pega uma tarefa do saco de tarefas e executa a verificação de primalidade para os números em seu intervalo.
 
