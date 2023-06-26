@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -fopenmp
 TARGET = primoNaive
-SOURCES = Naive/primosNaive.c
+SOURCES = BagOfTask/main.c
 OBJECTS = $(SOURCES:.c=.o)
 NUM_RUNS = 5
 

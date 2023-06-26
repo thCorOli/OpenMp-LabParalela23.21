@@ -4,6 +4,7 @@
 #include <math.h>
 #define TRUE 1
 #define FALSE 0
+#define TAMANHO 50000
 
 void setData(int* setNumThread, long int* setEntry) {
 	*setNumThread = 8;
@@ -31,21 +32,23 @@ int primo (long int n) {
 	return 1;
 }
 
-void output(int total, double tStart, double tFinal, long int n, int numThread) {
+void output(int total, double tUsed, long int n, int numThread) {
 	printf("Quant. de primos entre 1 e %ld: %d \n",n, total);
-    printf("Tempo de execucao: %1.7f \n", tFinal - tStart);
+    printf("Tempo de execucao: %1.7f \n", tUsed);
 	FILE *fpt; 
-	fpt = fopen("Naive.csv", "a"); 
-    fprintf(fpt,"%ld, %d, %1.7f, %d\n", n,total,tFinal - tStart, numThread);
+	fpt = fopen("Bag_Of_Task.csv", "a"); 
+    fprintf(fpt,"%ld, %d, %1.7f, %d\n", n,total,tUsed, numThread);
     fclose(fpt);
 }
 
 int main() {
 	double tFinal;
-	int numThread = 0;
+	int total = 1, numThread = 0, stop = 0;
 	long int entryNumber;
-    double tStart = omp_get_wtime(); // Pega o tempo em que as threads iniciaram a execução
-	int total = 1;
+	printf("Iniciando o Bag of Task \n");
+	
+	//Pega o tempo em que as threads iniciaram a execução
+    double tStart = omp_get_wtime(); 
 
 	//Funcao para a entrada de dados
 	setData(&numThread,&entryNumber);
@@ -56,16 +59,19 @@ int main() {
 	// Número de threads a ser usada
 	omp_set_num_threads(numThread); 
 
-	// Paralelismo
-	#pragma omp parallel for reduction(+:total)
-		for (int i = 3; i <= entryNumber; i += 2) {
+	//Paralelismo
+	#pragma omp parallel for schedule(dynamic,TAMANHO) reduction(+:total)
+		for(int i = 3; i <= entryNumber; i+=2){
 			if(primo(i) == 1) total++;
 		}
-		
-		
-	tFinal = omp_get_wtime(); // Pega o tempo em que foi finalizado o programa
-	//Funcao para a saida do programa
-	output(total,tStart,tFinal,entryNumber, numThread);	 
 	
-	return 0;
+	//Tempo final de processamento do programa
+    tFinal = omp_get_wtime(); 
+	
+	//Conta realizada para saber em quanto tempo o programa ficou rodando
+	double tUsed = tFinal - tStart; 
+	
+	//Função de saída 
+	output(total,tUsed,entryNumber, numThread);	
+	return(0);
 }
