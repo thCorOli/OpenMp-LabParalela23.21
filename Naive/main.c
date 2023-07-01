@@ -6,8 +6,8 @@
 #define FALSE 0
 
 void setData(int* setNumThread, long int* setEntry) {
-	*setNumThread = 8;
-	*setEntry = 100000;
+	*setNumThread = 1;
+	*setEntry = 10000000;
 	return ;
 }
 
@@ -36,7 +36,7 @@ void output(int total, double tUsed, long int n, int numThread) {
     printf("Tempo de execucao: %1.7f \n", tUsed);
 	FILE *fpt; 
 	fpt = fopen("Naive.csv", "a"); 
-    fprintf(fpt,"%ld, %d, %1.7f, %d\n", n,total,tUsed, numThread);
+    fprintf(fpt,"%1.7f,\n", tUsed);
     fclose(fpt);
 }
 
@@ -45,27 +45,26 @@ int main() {
 	int numThread = 0;
 	long int entryNumber;
 	int total = 1;
-	printf("Iniciando o Naive \n");
+	int salto;
 	
 	// Pega o tempo em que as threads iniciaram a execução
     double tStart = omp_get_wtime();
 
 	//Funcao para a entrada de dados
 	setData(&numThread,&entryNumber);
-
+	
 	//Funcao para validar
 	if(validateData(numThread,entryNumber) == FALSE) return 0;
-    
+   
 	// Número de threads a ser usada
 	omp_set_num_threads(numThread); 
-
+	
 	// Paralelismo
 	#pragma omp parallel for reduction(+:total)
 		for (int i = 3; i <= entryNumber; i += 2) {
 			if(primo(i) == 1) total++;
 		}
-		
-		
+	
 	// Pega o tempo em que foi finalizado o programa
 	tFinal = omp_get_wtime(); 
 	

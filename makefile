@@ -1,9 +1,9 @@
 CC = gcc
 CFLAGS = -fopenmp
 TARGET = main
-SOURCES = Naive/main.c
+SOURCES = BagOfTask/main.c
 OBJECTS = $(SOURCES:.c=.o)
-NUM_RUNS = 5
+NUM_RUNS = 10
 
 all: $(TARGET)
 

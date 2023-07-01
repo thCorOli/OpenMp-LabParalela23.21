@@ -7,8 +7,8 @@
 #define TAMANHO 50000
 
 void setData(int* setNumThread, long int* setEntry) {
-	*setNumThread = 8;
-	*setEntry = 100000;
+	*setNumThread = 1;
+	*setEntry = 10000000;
 	return ;
 }
 
@@ -37,15 +37,14 @@ void output(int total, double tUsed, long int n, int numThread) {
     printf("Tempo de execucao: %1.7f \n", tUsed);
 	FILE *fpt; 
 	fpt = fopen("Bag_Of_Task.csv", "a"); 
-    fprintf(fpt,"%ld, %d, %1.7f, %d\n", n,total,tUsed, numThread);
+    fprintf(fpt," %1.7f,\n", tUsed);
     fclose(fpt);
 }
 
 int main() {
 	double tFinal;
-	int total = 1, numThread = 0, stop = 0;
+	int total = 1, numThread = 0;
 	long int entryNumber;
-	printf("Iniciando o Bag of Task \n");
 	
 	//Pega o tempo em que as threads iniciaram a execução
     double tStart = omp_get_wtime(); 
