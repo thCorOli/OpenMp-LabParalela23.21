@@ -1,4 +1,4 @@
-# OpenMp-LabParalela23.21
+# OpenMp-LabParalela23.1
 
 ## Naive
 

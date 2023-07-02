@@ -7,7 +7,7 @@
 #define TAMANHO 50000
 
 void setData(int* setNumThread, long int* setEntry) {
-	*setNumThread = 1;
+	*setNumThread = 6;
 	*setEntry = 10000000;
 	return ;
 }
