@@ -4,7 +4,7 @@
 #include <math.h>
 #define TRUE 1
 #define FALSE 0
-#define TAMANHO 50000
+#define TAMANHO 5000
 
 void setData(int* setNumThread, long int* setEntry) {
 	*setNumThread = 6;
